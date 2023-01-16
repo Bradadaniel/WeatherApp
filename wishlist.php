@@ -1,5 +1,4 @@
 <?php
-
 include 'user_header.php';
 
 ?>
@@ -26,32 +25,34 @@ include 'user_header.php';
 </head>
 <body>
 
+
 <section class="wishlist">
     <h1 style="color: var(--white)">Kedvencek</h1>
     <div class="container">
+        <div class="row1">
         <?php
             $select_wishlist = $pdo->prepare("SELECT * FROM wishlist WHERE user_id=?");
             $select_wishlist->execute([$id]);
             if ($select_wishlist->rowCount() > 0){
                 while ($fetch_wishlist = $select_wishlist->fetch(PDO::FETCH_ASSOC)){
         ?>
-                    <div class="show" style="background: white">
+                    <form class="box" style="background: white" method="post" action="quick_wiew.php">
                         <p><?php echo $fetch_wishlist['name']?></p>
-                    </div>
-
-
+                        <button style="background: var(--light-bg)" type="submit" name="delete_wishlist" value="<?= $fetch_wishlist['id']?>"><i class="bi bi-trash"></i></button>
+                        <input type="hidden" name="">
+                        <button type="submit" style="background: var(--light-bg)" name="quick_view" value="<?= $fetch_wishlist['id']?>"><i class="bi bi-eye"></i></button>
+                    </form>
         <?php
                         }
                     }else{
                         echo '<p class="empty">Nincsennek kedvenceid!</p>';
                     }
-
             ?>
+        </div>
     </div>
-
-
-
 </section>
+
+
 
 
 
@@ -61,3 +62,7 @@ include 'user_header.php';
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 </body>
 </html>
+
+<?php
+
+?>

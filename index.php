@@ -106,106 +106,106 @@ $error_must_login = '';
     </div>
 </div>
 
-
+<?php if (isset($_GET['wishlist_added_successful'])){
+    echo '<p class="empty">Sikeresen hozzáadva a kedvencekhez!</p>';
+}?>
 <div class="container Search" style="margin-top: 20rem">
-    <?php echo $error_must_login?>
 <h1>Globális keresés</h1>
     <form action="" method="GET">
         <p><label for="city">Irja be a varos nevet</label><p>
         <p><input type="text" name="city" id="city" placeholder="Varos neve"></p>
         <p><button type="submit" name="submit" class="btn btn-success">Kereses</button></p>
-
-        <div class="output">
-
-            <div class="row1">
-                <?php
-                            if (isset($weather)){
-                                $city= $_GET['city'];
-                                $select_city = $pdo->prepare("SELECT * FROM weather WHERE name=?");
-                                $select_city->execute([$city]);
-                                while ($fetch_city = $select_city->fetch(PDO::FETCH_ASSOC)) {
-                                    ?>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="pid" value="<?= $fetch_city['weather_id']; ?>">
-                                        <input type="hidden" name="name" value="<?= $fetch_city['name']; ?>">
-                                        <button type="submit" name="add_to_wishlist"><i style="font-size: 3rem" class="bi bi-heart-fill"></i></button>
-                                    </form>
-                                        <?php
-                                        echo '
-                                    <div class="alert" role="alert">
-                            ' . $weather . '
-                            </div>';
-                                }
-                            }
-
-                            if (isset($error)) {
-                                echo '<div class="alert" role="alert">
-                            ' . $error . '
-                            </div>';
-                            }
-                ?>
-            </div>
-
-            <?php
-            if (isset($weather)){
-
-                $forecast=file_get_contents("https://api.openweathermap.org/data/2.5/forecast?q=".$_GET['city']."&&appid=cecafc8ca0dea8452deafc59d10a0e08");
-                $weatherForecast = json_decode($forecast, true);
-//                $tempCelsiusF = $weatherForecast['main']['temp'] - 273;
-//                $weatherF ="<b>".$weatherForecast['name'].", ".$weatherForecast['sys']['country']." : ".intval($tempCelsiusF)." &deg;C</b> <br>";
-//                $weatherF .="<b>Időjárási viszonyok : </b>" .$weatherForecast['weather']['0']['description']."<br>";
-//                $weatherF .="<b>Légnyomás : </b>" .$weatherForecast['main']['pressure']."hPa <br>";
-//                $weatherF .="<b>Szélsebeség : </b>" .$weatherForecast['wind']['speed']."m/s <br>";
-//                $weatherF .="<b>Felhősödés : </b>" .$weatherForecast['clouds']['all']." % <br>";
-//                $weather_icon =$weatherForecast['weather']['0']['icon'];
-//                $weatherF .="<img src='http://openweathermap.org/img/wn/".$weather_icon."@2x.png'>"."<br>";
-//                date_default_timezone_set('Europe/Belgrade');
-//                $sunrise = $weatherForecast['sys']['sunrise'];
-//                $weatherF .="<b>Napkelte : </b>" .date("g:i a", $sunrise)."<br>";
-//                $weatherF .="<b>Jelenlegi idő : </b>" .date("F j, Y, g:i a");
-                echo '
-            <div class="row2">
-                <div class="swiper middleSlider">
-                    <div class="swiper-wrapper">
-                    
-                        <div class="box swiper-slide">
-                            <div class="box-content">
-                                <div class="alert" role="alert"><h1>Hetfő</h1>' . $weather . '</div>
-                            </div>
-                        </div>
-                        <div class="box swiper-slide">
-                            <div class="box-content">
-                                <div class="alert" role="alert"><h1>Kedd</h1>' . $weather . '</div>
-                            </div>
-                        </div>
-                        <div class="box swiper-slide">
-                            <div class="box-content">
-                                <div class="alert" role="alert"><h1>Szerda</h1>' . $weather . '</div>
-                            </div>
-                        </div>
-                        <div class="box swiper-slide">
-                            <div class="box-content">
-                                <div class="alert" role="alert"><h1>Csütörtök</h1>' . $weather . '</div>
-                            </div>
-                        </div> 
-                        <div class="box swiper-slide">
-                            <div class="box-content">
-                                <div class="alert" role="alert"><h1>Péntek</h1>' . $weather . '</div>
-                            </div>  
-                        </div>
-                        
-                    </div>
-
-                </div>
-            </div>
-            ';
-            }
-            ?>
-
-        </div>
     </form>
 </div>
 
+
+<div class="container output">
+    <div class="row1">
+        <?php
+        if (isset($weather)){
+            $city= $_GET['city'];
+            $select_city = $pdo->prepare("SELECT * FROM weather WHERE name=?");
+            $select_city->execute([$city]);
+            while ($fetch_city = $select_city->fetch(PDO::FETCH_ASSOC)) {
+                ?>
+                <form class="wishlist-form" action="add_wishlist.php" method="post">
+                    <input type="hidden" name="city" value="<?=  $city?>">
+                    <input type="hidden" name="pid" value="<?= $fetch_city['weather_id']; ?>">
+                    <input type="hidden" name="name" value="<?= $fetch_city['name']; ?>">
+                    <button style="background: var(--light-bg)" type="submit" name="add_to_wishlist"><i style="font-size: 3rem" class="bi bi-heart-fill"></i></button>
+                </form>
+                <?php
+                echo '
+                                        <div class="alert" role="alert">
+                                ' . $weather . '
+                                </div>';
+            }
+        }
+
+        if (isset($error)) {
+            echo '<div class="alert" role="alert">
+                                ' . $error . '
+                                </div>';
+        }
+        ?>
+    </div>
+
+    <?php
+    if (isset($weather)){
+
+        $forecast=file_get_contents("https://api.openweathermap.org/data/2.5/forecast?q=".$_GET['city']."&&appid=cecafc8ca0dea8452deafc59d10a0e08");
+        $weatherForecast = json_decode($forecast, true);
+    //                $tempCelsiusF = $weatherForecast['main']['temp'] - 273;
+    //                $weatherF ="<b>".$weatherForecast['name'].", ".$weatherForecast['sys']['country']." : ".intval($tempCelsiusF)." &deg;C</b> <br>";
+    //                $weatherF .="<b>Időjárási viszonyok : </b>" .$weatherForecast['weather']['0']['description']."<br>";
+    //                $weatherF .="<b>Légnyomás : </b>" .$weatherForecast['main']['pressure']."hPa <br>";
+    //                $weatherF .="<b>Szélsebeség : </b>" .$weatherForecast['wind']['speed']."m/s <br>";
+    //                $weatherF .="<b>Felhősödés : </b>" .$weatherForecast['clouds']['all']." % <br>";
+    //                $weather_icon =$weatherForecast['weather']['0']['icon'];
+    //                $weatherF .="<img src='http://openweathermap.org/img/wn/".$weather_icon."@2x.png'>"."<br>";
+    //                date_default_timezone_set('Europe/Belgrade');
+    //                $sunrise = $weatherForecast['sys']['sunrise'];
+    //                $weatherF .="<b>Napkelte : </b>" .date("g:i a", $sunrise)."<br>";
+    //                $weatherF .="<b>Jelenlegi idő : </b>" .date("F j, Y, g:i a");
+    //                echo '
+    //            <div class="row2">
+    //                <div class="swiper middleSlider">
+    //                    <div class="swiper-wrapper">
+    //
+    //                        <div class="box swiper-slide">
+    //                            <div class="box-content">
+    //                                <div class="alert" role="alert"><h1>Hetfő</h1>' . $weather . '</div>
+    //                            </div>
+    //                        </div>
+    //                        <div class="box swiper-slide">
+    //                            <div class="box-content">
+    //                                <div class="alert" role="alert"><h1>Kedd</h1>' . $weather . '</div>
+    //                            </div>
+    //                        </div>
+    //                        <div class="box swiper-slide">
+    //                            <div class="box-content">
+    //                                <div class="alert" role="alert"><h1>Szerda</h1>' . $weather . '</div>
+    //                            </div>
+    //                        </div>
+    //                        <div class="box swiper-slide">
+    //                            <div class="box-content">
+    //                                <div class="alert" role="alert"><h1>Csütörtök</h1>' . $weather . '</div>
+    //                            </div>
+    //                        </div>
+    //                        <div class="box swiper-slide">
+    //                            <div class="box-content">
+    //                                <div class="alert" role="alert"><h1>Péntek</h1>' . $weather . '</div>
+    //                            </div>
+    //                        </div>
+    //
+    //                    </div>
+    //
+    //                </div>
+    //            </div>
+    //            ';
+    }
+    ?>
+</div>
 <div class="container" style="max-width: 600px;padding:2rem 0">
 <table class="table-index">
     <thead>
@@ -215,7 +215,6 @@ $error_must_login = '';
             <?php
             $cities=["Subotica", "Belgrade", "Pristina", "Niš", "Novi Sad", "Prizren", "Podgorica", "Kragujevac", "Čačak", "Kosovska Mitrovica", "Leskovac", "Novi Pazar"];
             foreach ($cities as $citi) {
-            //    $city_name_belgrade = $citi;
             $apiData1 = file_get_contents("https://api.openweathermap.org/data/2.5/weather?q=" . $citi . "&appid=cecafc8ca0dea8452deafc59d10a0e08");
             $weatherArray = json_decode($apiData1, true);
             $weather = "<b>" . $weatherArray['name'] . "  " . intval($tempCelsius) . " &deg;C</b>";
@@ -235,19 +234,10 @@ $error_must_login = '';
 </table>
 </div>
 
-<?php
-if (isset($_POST['add_to_wishlist'])){
-    if ($id !== ''){
-        $_SESSION['CITY'] = $city;
-        $city_id = $_POST['pid'];
-        $city_name_database = $_POST['name'];
-        $insert_wishlist = $pdo->prepare("INSERT INTO wishlist (user_id, id_city, name) VALUES (?,?,?)");
-        $insert_wishlist->execute([$id, $city_id, $city_name_database]);
-    }else{
-        $error_must_login="asdzxczxczxc";
-    }
-}
-?>
+
+
+
+
 <?php include "footer.php";?>
 
 <script src="js/script.js"></script>
