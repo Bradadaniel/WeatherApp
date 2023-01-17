@@ -39,7 +39,7 @@ include 'user_header.php';
                     <form class="box" style="background: white" method="post" action="quick_wiew.php">
                         <p><?php echo $fetch_wishlist['name']?></p>
                         <button style="background: var(--light-bg)" type="submit" name="delete_wishlist" value="<?= $fetch_wishlist['id']?>"><i class="bi bi-trash"></i></button>
-                        <input type="hidden" name="">
+                        <input type="hidden" name="id_wishlist" value="<?= $fetch_wishlist['id']?>">
                         <button type="submit" style="background: var(--light-bg)" name="quick_view" value="<?= $fetch_wishlist['id']?>"><i class="bi bi-eye"></i></button>
                     </form>
         <?php

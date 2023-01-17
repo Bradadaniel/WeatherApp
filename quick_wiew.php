@@ -12,6 +12,7 @@ if (isset($_POST['delete_wishlist'])){
 }
 
 
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -35,16 +36,59 @@ if (isset($_POST['delete_wishlist'])){
 </head>
 <body>
 <?php if (isset($_POST['quick_view'])){
-        echo 'asd';
-}?>
-<div class="container">
-    <h1></h1>
-    <div class="titles">
-    </div>
-    <div class="datas">
+        $id_wishlist= $_POST['id_wishlist'];
+        $select_wishlist=$pdo->prepare("SELECT * FROM wishlist WHERE id=?");
+        $select_wishlist->execute([$id_wishlist]);
+        while ($row = $select_wishlist->fetch(PDO::FETCH_ASSOC)){
+                $city_name = $row['name'];
 
-    </div>
+                    $apiData = file_get_contents("https://api.openweathermap.org/data/2.5/weather?q=" . $city_name . "&appid=cecafc8ca0dea8452deafc59d10a0e08");
+                    $weatherArray = json_decode($apiData, true);
+                    $tempCelsius = $weatherArray['main']['temp'] - 273;
+                    $weather = "<b>" . intval($tempCelsius) . " &deg;C</b> <br>";
+                    $weather .= "<b>Időjárási viszonyok : </b>" . $weatherArray['weather']['0']['description'] . "<br>";
+                    $weather .= "<b>Légnyomás : </b>" . $weatherArray['main']['pressure'] . "hPa <br>";
+                    $weather .= "<b>Szélsebeség : </b>" . $weatherArray['wind']['speed'] . "m/s <br>";
+                    $weather .= "<b>Felhősödés : </b>" . $weatherArray['clouds']['all'] . " % <br>";
+                    $weather_icon = $weatherArray['weather']['0']['icon'];
+                    $weather .= "<img src='http://openweathermap.org/img/wn/" . $weather_icon . "@2x.png'>" . "<br>";
+                    date_default_timezone_set('Europe/Belgrade');
+                    $sunrise = $weatherArray['sys']['sunrise'];
 
+                //$name = $weatherArray['name'];
+                //$weather_type = $weatherArray['weather']['0']['main'];
+
+?>
+<div class="container" style="background: var(--white);font-size: 2rem;padding: 2rem;margin-top: 1rem;border-radius: 2rem">
+    <div class="quick-view-wishlist">
+    <div class="box" style="padding: 2rem">
+        <?php
+           echo '<h1>'.$city_name.'</h1> ';
+?>
+    </div>
+    <div class="box">
+        <?php echo $weather?>
+    </div>
+        <div class="box-long">
+            <form id="box-longg" action="check_weather_type.php" method="post">
+                <label for="">Válasszon egyet</label>
+                <p>Álitson be értesitést az adott időjáráshoz!</p>
+                <input type="radio" id="checked" name="checked" value="Clouds"> Felhős <br>
+                <input type="radio" id="checked" name="checked" value="Thunderstorm"> Zivatar <br>
+                <input type="radio" id="checked" name="checked" value="Drizzle"> Szitálás <br>
+                <input type="radio" id="checked" name="checked" value="Rain"> Eső <br>
+                <input type="radio" id="checked" name="checked" value="Snow"> Havazás <br>
+                <input type="radio" id="checked" name="checked" value="Atmosphere"> Szélfúvás <br>
+                <input type="radio" id="checked" name="checked" value="Clear"> Napos <br>
+                <input type="hidden" name="city_name" id="city_name" value="<?php echo $city_name?>">
+                <input type="submit" id="submit" name="submit" value="Küldés" class="btn btn-success" style="font-size: 2rem;margin-top: 1rem">
+            </form>
+        </div>
+    </div>
+<?php
+    }
+    }
+    ?>
 </div>
 
 

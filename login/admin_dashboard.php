@@ -81,7 +81,8 @@ $data = $result->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container" style="background: var(--light-bg);padding: 1rem">
     <h1 style="color: var(--black);text-align: center">Felhasználók</h1>
-    <table id="tableNotes" class="table-index mx-auto">
+<!--    table-index -->
+    <table id="tableNotes" class="table mx-auto">
         <thead class="thead-dark" style="background: var(--black);color:var(--white);">
             <tr>
                 <th scope="col">ID</th>

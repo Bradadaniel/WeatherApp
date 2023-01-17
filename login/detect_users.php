@@ -44,8 +44,9 @@ $data = $result->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container" style="background: var(--light-bg);padding: 1rem">
         <h1 style="color: var(--black);text-align: center">Detectálások</h1>
-    <table id="tableDetects" class="table-index" style="align-items: center; text-align: center;background: var(--light-bg);padding: 1rem">
-        <thead>
+<!--    class="table-index"-->
+    <table id="tableDetects" class="table mx-auto" style="align-items: center; text-align: center;background: var(--light-bg);padding: 1rem">
+        <thead class="thead-dark" style="background: var(--black);color:var(--white);">
         <tr>
             <th scope="col">Felhasználó ID</th>
             <th scope="col">Készülék</th>
