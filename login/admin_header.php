@@ -12,6 +12,13 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
 else{
     $email = '';
 }
+
+if (isset($_SESSION['ID'])) {
+    $id =$_SESSION['ID'];
+}
+else{
+    $id = '';
+}
 ?>
 
 <header class="header">

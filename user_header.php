@@ -22,10 +22,6 @@ else{
 ?>
 
 
-
-
-
-
 <header class="header">
 
     <section class="flex">
@@ -42,12 +38,19 @@ else{
 
         <div class="icons">
 <?php
-               $count_wishlist_items= $pdo->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
-               $count_wishlist_items->execute([$id]);
+                $count_wishlist_items= $pdo->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
+                $count_wishlist_items->execute([$id]);
                 $total_wishlist_items = $count_wishlist_items->rowCount();
+
+                $count_notifications= $pdo->prepare("SELECT * FROM `notifications` WHERE user_id = ?");
+                $count_notifications->execute([$id]);
+                $total_notifications = $count_notifications->rowCount();
 
             ?>
             <div id="menu-btn" class="fas fa-bars"></div>
+            <a href="notification.php"><i class="bi bi-bell-fill"></i><span>
+                    (<?php echo $total_notifications;?>)
+                </span></a>
             <a href="wishlist.php"><i class="fas fa-heart"></i><span>
                     (<?php echo $total_wishlist_items;?>)
                 </span></a>

@@ -45,34 +45,7 @@ $data = $result->fetchAll(PDO::FETCH_ASSOC);
     <title>Admin</title>
 </head>
 <body>
-<!--<section style="background: rgba(161,161,161,0.3);border-radius: 2rem">-->
-<!--    <div class="card-group">-->
-<!--        <div class="card" style="margin: 1rem">-->
-<!--            <div class="card-body">-->
-<!--                <h5 class="card-title" style="font-size: 4rem">Felhasználók</h5>-->
-<!--            </div>-->
-<!--            <div class="card-footer">-->
-<!--                <input type="submit" value="Tovább" name="displaybtn" id="displaybtn" class="btn btn-dark" style="width: 100%;height: 4rem;font-size: 2rem">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="card" style="margin: 1rem">-->
-<!--            <div class="card-body">-->
-<!--                <h5 class="card-title" style="font-size: 4rem">Detect</h5>-->
-<!--            </div>-->
-<!--            <div class="card-footer">-->
-<!--                <input type="submit" value="Tovább" name="displaybtndetect" id="displaybtndetect" class="btn btn-dark" style="width: 100%;height: 4rem;font-size: 2rem">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="card" style="margin: 1rem">-->
-<!--            <div class="card-body">-->
-<!--                <h5 class="card-title" style="font-size: 4rem">Városok</h5>-->
-<!--            </div>-->
-<!--            <div class="card-footer">-->
-<!--                <button type="submit" class="btn btn-dark" style="width: 100%;height: 4rem;font-size: 2rem">Tovább</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
+
 <div id="displaydata">
 </div>
 

@@ -30,13 +30,18 @@ $(document).ready(function () {
 
 $(document).ready(function (){
    TableNotes =$("#tableNotes").DataTable();
-
 });
 
 $(document).ready(function (){
     TableDetects =$("#tableDetects").DataTable();
-
 });
+
+$(document).ready(function (){
+    TableNotifications =$("#tableNotifications").DataTable();
+});
+
+
+
 
 
 
