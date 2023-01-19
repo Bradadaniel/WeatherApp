@@ -152,57 +152,91 @@ $error_must_login = '';
 
     <?php
     if (isset($weather)){
-
-        $forecast=file_get_contents("https://api.openweathermap.org/data/2.5/forecast?q=".$_GET['city']."&&appid=cecafc8ca0dea8452deafc59d10a0e08");
+        $forecast=file_get_contents("https://api.openweathermap.org/data/2.5/forecast?q=".$name."&cnt=8&appid=cecafc8ca0dea8452deafc59d10a0e08");
         $weatherForecast = json_decode($forecast, true);
-    //                $tempCelsiusF = $weatherForecast['main']['temp'] - 273;
-    //                $weatherF ="<b>".$weatherForecast['name'].", ".$weatherForecast['sys']['country']." : ".intval($tempCelsiusF)." &deg;C</b> <br>";
-    //                $weatherF .="<b>Időjárási viszonyok : </b>" .$weatherForecast['weather']['0']['description']."<br>";
-    //                $weatherF .="<b>Légnyomás : </b>" .$weatherForecast['main']['pressure']."hPa <br>";
-    //                $weatherF .="<b>Szélsebeség : </b>" .$weatherForecast['wind']['speed']."m/s <br>";
-    //                $weatherF .="<b>Felhősödés : </b>" .$weatherForecast['clouds']['all']." % <br>";
-    //                $weather_icon =$weatherForecast['weather']['0']['icon'];
-    //                $weatherF .="<img src='http://openweathermap.org/img/wn/".$weather_icon."@2x.png'>"."<br>";
-    //                date_default_timezone_set('Europe/Belgrade');
-    //                $sunrise = $weatherForecast['sys']['sunrise'];
-    //                $weatherF .="<b>Napkelte : </b>" .date("g:i a", $sunrise)."<br>";
-    //                $weatherF .="<b>Jelenlegi idő : </b>" .date("F j, Y, g:i a");
-    //                echo '
-    //            <div class="row2">
-    //                <div class="swiper middleSlider">
-    //                    <div class="swiper-wrapper">
-    //
-    //                        <div class="box swiper-slide">
-    //                            <div class="box-content">
-    //                                <div class="alert" role="alert"><h1>Hetfő</h1>' . $weather . '</div>
-    //                            </div>
-    //                        </div>
-    //                        <div class="box swiper-slide">
-    //                            <div class="box-content">
-    //                                <div class="alert" role="alert"><h1>Kedd</h1>' . $weather . '</div>
-    //                            </div>
-    //                        </div>
-    //                        <div class="box swiper-slide">
-    //                            <div class="box-content">
-    //                                <div class="alert" role="alert"><h1>Szerda</h1>' . $weather . '</div>
-    //                            </div>
-    //                        </div>
-    //                        <div class="box swiper-slide">
-    //                            <div class="box-content">
-    //                                <div class="alert" role="alert"><h1>Csütörtök</h1>' . $weather . '</div>
-    //                            </div>
-    //                        </div>
-    //                        <div class="box swiper-slide">
-    //                            <div class="box-content">
-    //                                <div class="alert" role="alert"><h1>Péntek</h1>' . $weather . '</div>
-    //                            </div>
-    //                        </div>
-    //
-    //                    </div>
-    //
-    //                </div>
-    //            </div>
-    //            ';
+
+                $tempCelsiusF = $weatherForecast['list']['0']['main']['temp']- 273;
+                $weatherF ="<b>".$weatherForecast['city']['name'].", ".$weatherForecast['city']['country']." : ".intval($tempCelsius)." &deg;C</b> <br>";
+                $weatherF .="<b>Időjárási viszonyok : </b>"."<b>".$weatherForecast['list']['0']['weather']['0']['description']."</b><br>";
+                $weather_icon =$weatherForecast['list']['0']['weather']['0']['icon'];
+                $weatherF .="<img src='http://openweathermap.org/img/wn/".$weather_icon."@2x.png'>"."<br>";
+
+        $forecast2=file_get_contents("https://api.openweathermap.org/data/2.5/forecast?q=".$name."&cnt=16&appid=cecafc8ca0dea8452deafc59d10a0e08");
+        $weatherForecast2 = json_decode($forecast2, true);
+
+                $tempCelsiusF2 = $weatherForecast2['list']['0']['main']['temp']- 273;
+                $weatherF2 ="<b>".$weatherForecast2['city']['name'].", ".$weatherForecast2['city']['country']." : ".intval($tempCelsiusF2)." &deg;C</b> <br>";
+                $weatherF2 .="<b>Időjárási viszonyok : </b>"."<b>".$weatherForecast['list']['0']['weather']['0']['description']."</b><br>";
+                $weather_icon2 =$weatherForecast2['list']['0']['weather']['0']['icon'];
+                $weatherF2 .="<img src='http://openweathermap.org/img/wn/".$weather_icon2."@2x.png'>"."<br>";
+
+        $forecast3=file_get_contents("https://api.openweathermap.org/data/2.5/forecast?q=".$name."&cnt=24&appid=cecafc8ca0dea8452deafc59d10a0e08");
+        $weatherForecast3 = json_decode($forecast3, true);
+
+                $tempCelsiusF3 = $weatherForecast3['list']['0']['main']['temp']- 273;
+                $weatherF3 ="<b>".$weatherForecast3['city']['name'].", ".$weatherForecast3['city']['country']." : ".intval($tempCelsiusF3)." &deg;C</b> <br>";
+                $weatherF3.="<b>Időjárási viszonyok : </b>"."<b>".$weatherForecast['list']['0']['weather']['0']['description']."</b><br>";
+                $weather_icon3 =$weatherForecast3['list']['0']['weather']['0']['icon'];
+                $weatherF3 .="<img src='http://openweathermap.org/img/wn/".$weather_icon3."@2x.png'>"."<br>";
+
+
+        $forecast4=file_get_contents("https://api.openweathermap.org/data/2.5/forecast?q=".$name."&cnt=32&appid=cecafc8ca0dea8452deafc59d10a0e08");
+        $weatherForecast4 = json_decode($forecast4, true);
+
+                $tempCelsiusF4 = $weatherForecast4['list']['0']['main']['temp']- 273;
+                $weatherF4 ="<b>".$weatherForecast4['city']['name'].", ".$weatherForecast4['city']['country']." : ".intval($tempCelsiusF4)." &deg;C</b> <br>";
+                $weatherF4 .="<b>Időjárási viszonyok : </b>"."<b>".$weatherForecast['list']['0']['weather']['0']['description']."</b><br>";
+                $weather_icon4 =$weatherForecast4['list']['0']['weather']['0']['icon'];
+                $weatherF4 .="<img src='http://openweathermap.org/img/wn/".$weather_icon4."@2x.png'>"."<br>";
+
+
+        $forecast5=file_get_contents("https://api.openweathermap.org/data/2.5/forecast?q=".$name."&cnt=40&appid=cecafc8ca0dea8452deafc59d10a0e08");
+        $weatherForecast5 = json_decode($forecast5, true);
+
+                $tempCelsiusF5 = $weatherForecast5['list']['0']['main']['temp']- 273;
+                $weatherF5 ="<b>".$weatherForecast5['city']['name'].", ".$weatherForecast5['city']['country']." : ".intval($tempCelsiusF5)." &deg;C</b> <br>";
+                $weatherF5 .="<b>Időjárási viszonyok : </b>"."<b>".$weatherForecast['list']['0']['weather']['0']['description']."</b><br>";
+                $weather_icon5 =$weatherForecast5['list']['0']['weather']['0']['icon'];
+                $weatherF5 .="<img src='http://openweathermap.org/img/wn/".$weather_icon5."@2x.png'>"."<br>";
+
+
+
+                    echo '
+                <div class="row2">
+                    <div class="swiper middleSlider">
+                        <div class="swiper-wrapper">
+    
+                            <div class="box swiper-slide">
+                                <div class="box-content">
+                                    <div class="alert" role="alert"><h1>'.date('Y-m-d', strtotime(' +1 day')).'</h1>' . $weatherF . '</div>
+                                </div>
+                            </div>
+                            <div class="box swiper-slide">
+                                <div class="box-content">
+                                    <div class="alert" role="alert"><h1>'.date('Y-m-d', strtotime(' +2 day')).'</h1>' . $weatherF2 . '</div>
+                                </div>
+                            </div>
+                            <div class="box swiper-slide">
+                                <div class="box-content">
+                                    <div class="alert" role="alert"><h1>'.date('Y-m-d', strtotime(' +3 day')).'</h1>' . $weatherF3 . '</div>
+                                </div>
+                            </div>
+                            <div class="box swiper-slide">
+                                <div class="box-content">
+                                    <div class="alert" role="alert"><h1>'.date('Y-m-d', strtotime(' +4 day')).'</h1>' . $weatherF4 . '</div>
+                                </div>
+                            </div>
+                            <div class="box swiper-slide">
+                                <div class="box-content">
+                                    <div class="alert" role="alert"><h1>'.date('Y-m-d', strtotime(' +5 day')).'</h1>' . $weatherF5 . '</div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                    </div>
+                </div>
+                ';
     }
     ?>
 </div>
@@ -232,6 +266,20 @@ $error_must_login = '';
     </tbody>
 
 </table>
+</div>
+
+<div class="parallax">
+    <div class="text">
+        <h2>Csatlakozz hozzánk!</h2>
+        <a href="login/user_login.php" class="btn option-btn">Folytatás
+        </a>
+    </div>
+</div>
+
+<div class="text-content-box">
+    <div class="box">
+
+    </div>
 </div>
 
 
