@@ -447,15 +447,20 @@ section{
     justify-content: center;
 }
 .my_notifications .row .box{
-    background-color: var(--white);
-    border-radius: .5rem;
-    border: var(--border);
+    background: url('../img/circle.png');
+    background-size: cover;
+    background-position: center;
     box-shadow: var(--box-shadow);
     padding: 2rem;
+    text-align: center;
     position: relative;
     overflow: hidden;
     margin-bottom: 5rem;
+    color: var(--white);
     font-size: 2rem;
+    min-width: 330px;
+    min-height: 330px;
+    padding-top: 40px;
 }
 
 

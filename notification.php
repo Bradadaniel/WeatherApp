@@ -18,8 +18,10 @@ include 'user_header.php';
     <title>Wishlist</title>
     <style>
 body{
-    background: url("img/bg-3.jpg");
+    /*background: #544444;*/
+    background: url("img/sun.png") ;
     background-size: cover;
+    backdrop-filter: brightness(50%);
         }
     </style>
 </head>
@@ -58,7 +60,7 @@ $data = $count_notifications->fetchAll(PDO::FETCH_ASSOC);
 
 <section class="my_notifications">
     <div class="container">
-        <h1 class="heading">Beálított értesítések!</h1>
+        <h1 class="heading" style="color: var(--white)">Beálított értesítések!</h1>
     <?php
     if ($id ==''){
         header("Location:login/user_login.php");
@@ -72,23 +74,14 @@ $data = $count_notifications->fetchAll(PDO::FETCH_ASSOC);
                                         gap: 1.5rem;
                                         align-items: center;
                                         justify-content: center;">
-                <form method="post" action="delete_notice.php" class="box" style="
-                                            background: url('img/card-bg.png');
-                                            border-radius: .5rem;
-                                            border: var(--border);
-                                            box-shadow: var(--box-shadow);
-                                            padding: 2rem;
-                                            position: relative;
-                                            overflow: hidden;
-                                            margin-bottom: 5rem;
-                        font-size: 2rem;">
+                <form method="post" action="delete_notice.php" class="box"
                    <p>Név: <?php echo $row['name']?></p>
                    <p>Város neve: <?php echo $row['city_name']?></p>
                    <p>Beálított időjárás: <?php echo $row['setteddescription']?></p>
                    <input type="hidden" name="id_notice" value="<?php echo $row['id']?>">
                    <input type="hidden" name="city_name" value="<?php echo $row['city_name']?>">
                    <input type="hidden" name="setteddescription" value="<?php echo $row['setteddescription']?>">
-                   <button style="border: 1px solid white" class="delete-btn" type="submit" name="delete_notice" value="<?php echo $row['id']?>">Törlés</button>
+                   <button style="border: 1px solid white;width: 100px" class="btn btn-success" type="submit" name="delete_notice" value="<?php echo $row['id']?>">Törlés</button>
                 </form>
             </div>
         </div>

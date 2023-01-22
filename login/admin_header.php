@@ -28,10 +28,10 @@ else{
         <a href="../index.php" class="logo"><span>Storm</span>Site</a>
 
         <nav class="navbar">
-            <a href="admin_dashboard.php" style="text-decoration: none">Kezdőoldal</a>
-            <a href="about.php" style="text-decoration: none">Rólunk</a>
+            <a href="admin_dashboard.php" style="text-decoration: none">Felhasználók</a>
+            <a href="statistic.php" style="text-decoration: none">Statisztika</a>
             <a href="detect_users.php" style="text-decoration: none">Detect</a>
-            <a href="contact.php" style="text-decoration: none">Kapcsolat</a>
+
 
         </nav>
 

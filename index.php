@@ -56,6 +56,22 @@ if(array_key_exists('submit', $_GET)){
                 $insert_city = $pdo->prepare("INSERT INTO weather (name, description) VALUES (?,?)");
                 $insert_city->execute([$name, $weather_type]);
             }
+
+            $check_statistic = $pdo->prepare("SELECT * FROM statistic WHERE name = ?");
+            $check_statistic->execute([$name]);
+            if ($check_statistic->rowCount() === 0){
+                $score=1;
+                $insert_statistic = $pdo->prepare("INSERT INTO statistic (name, score) VALUES (?,?)");
+                $insert_statistic->execute([$name, $score]);
+            }else{
+                $row = $check_statistic->fetch(PDO::FETCH_ASSOC);
+                $score = $row['score'];
+                $score +=1;
+                $update_statistic = $pdo->prepare("UPDATE statistic SET score=:score WHERE name ='$name'");
+                $update_statistic->bindParam(':score',$score);
+                $result = $update_statistic->execute();
+            }
+
         }else{
             $error = "Nem megfelelő városnév!";
         }
@@ -145,6 +161,20 @@ $error_must_login = '';
             echo '<div class="alert" role="alert">
                                 ' . $error . '
                                 </div>';
+        }
+        ?>
+    </div>
+    <div class="row3">
+        <?php
+        if (isset($weather)){
+        $city= $_GET['city'];
+        $select_city = $pdo->prepare("SELECT * FROM weather WHERE name=?");
+        $select_city->execute([$city]);
+        while ($fetch_city = $select_city->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+        <iframe width="100%" height="300px" src="https://maps.google.com/maps?q=<?php echo $fetch_city['name']?>&output=embed"></iframe>
+        <?php
+        }
         }
         ?>
     </div>
