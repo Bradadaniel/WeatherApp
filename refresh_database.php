@@ -8,6 +8,7 @@ require 'vendor/autoload.php';
 
 include 'user_header.php';
 
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,7 +22,7 @@ include 'user_header.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css" integrity="sha512-FA9cIbtlP61W0PRtX36P6CGRy0vZs0C2Uw26Q1cMmj3xwhftftymr0sj8/YeezDnRwL9wtWw8ZwtCiTDXlXGjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <title>Wishlist</title>
+    <title>Database</title>
     <style>
         body{
             background: url("img/bg-4.jpg");
@@ -29,7 +30,8 @@ include 'user_header.php';
         }
     </style>
 </head>
-<body onload="window.setTimeout(function(){document.location.reload(true);},600000)">
+<body>
+<!--onload="window.setTimeout(function(){document.location.reload(true);},60000)"-->
 <?php
 $select_weather=$pdo->prepare("SELECT * FROM weather");
 $select_weather->execute();
@@ -55,63 +57,79 @@ while ($row = $select_weather->fetch(PDO::FETCH_ASSOC)){
 <script src="js/script.js"></script>
 <script src="ajax/admin.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<script>
+    setInterval(function() {
+        var isActive = true;
+        // Check if the page is active
+        if (!document.hidden) {
+            isActive = true;
+        } else {
+            isActive = false;
+        }
+
+        // Send a request to the PHP script
+        if (!isActive) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "refresh_database.php", true);
+            xhttp.send();
+        }
+    }, 60000);
+</script>
+
 </body>
 </html>
 <?php
+            $check_notice = $pdo->prepare("SELECT * FROM notice");
+            $check_notice->execute();
 
-$check_notice = $pdo->prepare("SELECT * FROM notice");
-$check_notice->execute();
+            while ($row = $check_notice->fetch(PDO::FETCH_ASSOC)) {
+                $description = $row['description'];
+                $setteddescription = $row['setteddescription'];
 
-while ($row = $check_notice->fetch(PDO::FETCH_ASSOC)){
-    $description =$row['description'];
-    $setteddescription = $row['setteddescription'];
+                if ($description == $setteddescription) {
+//                    if (!isset($_COOKIE['NOTICE'])) {
+//                        echo $row['name'];
+//                    } else {
+                        $name = $row['name'];
+                        $email = $row['email'];
+                        $city_name_database = $row['city_name'];
 
-    if ($description==$setteddescription){
-        if (isset($_COOKIE['NOTICE'])){
-            echo $row['name'];
-        }else{
-            $name = $row['name'];
-            $email = $row['email'];
-            $city_name_database = $row['city_name'];
+//                        $cookie_value = $name;
+//                        setcookie('NOTICE', $cookie_value, time() + 60000);
 
-            $cookie_value = $name;
-            setcookie('NOTICE', $cookie_value, time() + 600000, httponly: true);
+                        echo "<div style='display: none;'>";
+                        $mail = new PHPMailer(true);
+                        try {
+                            //Server settings
+                            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                            $mail->isSMTP();                                            //Send using SMTP
+                            $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                            $mail->SMTPAuth = true;                                   //Enable SMTP authentication
+                            $mail->Username = "danibrada29@gmail.com";
+                            $mail->Password = "iuwnykymzxfrmepw";                            //SMTP password
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                            $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                            $mail->SMTPSecure = 'tls';
 
-            echo "<div style='display: none;'>";
-            $mail = new PHPMailer(true);
-            try {
-                //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth = true;                                   //Enable SMTP authentication
-                $mail->Username = "danibrada29@gmail.com";
-                $mail->Password = "iuwnykymzxfrmepw";                            //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-                $mail->SMTPSecure = 'tls';
+                            //Recipients
+                            $mail->setFrom('danibrada29@gmail.com');
+                            $mail->addAddress("danibrada29@gmail.com");
+                            //$email
 
-                //Recipients
-                $mail->setFrom('danibrada29@gmail.com');
-                $mail->addAddress("danibrada29@gmail.com");
-                //$email
+                            //Content
+                            $mail->isHTML(true);                                  //Set email format to HTML
+                            $mail->Subject = 'StormSite';
+                            $mail->Body = 'Kedves <b>' . $name . '</b> - <b>' . $city_name_database . '</b>' . ',értesitjük az ön által beálitott időjárás megváltozott <b>' . $setteddescription . '</b>';
 
-                //Content
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'StormSite';
-                $mail->Body = 'Kedves <b>'.$name.'</b> - <b>'.$city_name_database.'</b>'.',értesitjük az ön által beálitott időjárás megváltozott <b>'.$setteddescription.'</b>';
+                            $mail->send();
+                        } catch (Exception $e) {
+                            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                        }
 
-                $mail->send();
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
+
+//                }
+
             }
-
-        }
-
-    }
-
-}
-
-
-
 ?>

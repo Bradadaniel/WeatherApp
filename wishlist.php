@@ -53,11 +53,6 @@ include 'user_header.php';
 </section>
 
 
-
-
-
-
-
 <script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 </body>

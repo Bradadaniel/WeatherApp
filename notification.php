@@ -18,7 +18,7 @@ include 'user_header.php';
     <title>Wishlist</title>
     <style>
 body{
-    background: url("img/bg-4.jpg");
+    background: url("img/bg-3.jpg");
     background-size: cover;
         }
     </style>
@@ -56,6 +56,46 @@ $data = $count_notifications->fetchAll(PDO::FETCH_ASSOC);
     </table>
 </div>
 
+<section class="my_notifications">
+    <div class="container">
+        <h1 class="heading">Beálított értesítések!</h1>
+    <?php
+    if ($id ==''){
+        header("Location:login/user_login.php");
+    }
+    $select_notice = $pdo->prepare("SELECT * FROM notice WHERE user_id = $id");
+    $select_notice->execute();
+    while ($row= $select_notice->fetch(PDO::FETCH_ASSOC)){
+    ?>
+            <div class="row" style="    display: grid;
+                                        grid-template-columns: repeat(auto-fit, 33rem);
+                                        gap: 1.5rem;
+                                        align-items: center;
+                                        justify-content: center;">
+                <form method="post" action="delete_notice.php" class="box" style="
+                                            background: url('img/card-bg.png');
+                                            border-radius: .5rem;
+                                            border: var(--border);
+                                            box-shadow: var(--box-shadow);
+                                            padding: 2rem;
+                                            position: relative;
+                                            overflow: hidden;
+                                            margin-bottom: 5rem;
+                        font-size: 2rem;">
+                   <p>Név: <?php echo $row['name']?></p>
+                   <p>Város neve: <?php echo $row['city_name']?></p>
+                   <p>Beálított időjárás: <?php echo $row['setteddescription']?></p>
+                   <input type="hidden" name="id_notice" value="<?php echo $row['id']?>">
+                   <input type="hidden" name="city_name" value="<?php echo $row['city_name']?>">
+                   <input type="hidden" name="setteddescription" value="<?php echo $row['setteddescription']?>">
+                   <button style="border: 1px solid white" class="delete-btn" type="submit" name="delete_notice" value="<?php echo $row['id']?>">Törlés</button>
+                </form>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
+</section>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>

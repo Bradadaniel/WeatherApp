@@ -439,6 +439,25 @@ section{
     background: var(--black);
     color: #fff;
 }
+.my_notifications .row{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 33rem);
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+.my_notifications .row .box{
+    background-color: var(--white);
+    border-radius: .5rem;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 5rem;
+    font-size: 2rem;
+}
+
 
 
 

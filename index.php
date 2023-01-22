@@ -26,7 +26,6 @@
 <?php include 'user_header.php';
 
 if(array_key_exists('submit', $_GET)){
-    //megnezzuk ures e az input+
     if (!$_GET['city']){
         $error = "Figyelem üres beviteli mező";
     }
