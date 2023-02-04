@@ -38,7 +38,7 @@ include 'user_header.php';
         ?>
                     <form class="box" style="background: white" method="post" action="quick_wiew.php">
                         <h1><?php echo $fetch_wishlist['name']?></h1>
-                        <iframe width="100%" height="100%" src="https://maps.google.com/maps?q=<?php echo $fetch_wishlist['name']?>&output=embed"></iframe>
+                        <iframe width="100%" height="200px" src="https://maps.google.com/maps?q=<?php echo $fetch_wishlist['name']?>&output=embed"></iframe>
                         <button style="background: var(--light-bg);transform: scale(1.5)" type="submit" name="delete_wishlist" value="<?= $fetch_wishlist['id']?>"><i class="bi bi-trash"></i></button>
                         <input type="hidden" name="id_wishlist" value="<?= $fetch_wishlist['id']?>">
                         <button type="submit" style="background: var(--light-bg);transform: scale(1.5);margin-left: .5rem" name="quick_view" value="<?= $fetch_wishlist['id']?>"><i class="bi bi-eye"></i></button>

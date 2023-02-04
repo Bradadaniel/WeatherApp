@@ -276,10 +276,11 @@ $error_must_login = '';
     </thead>
     <tbody>
             <?php
-            $cities=["Subotica", "Belgrade", "Pristina", "Niš", "Novi Sad", "Prizren", "Podgorica", "Kragujevac", "Čačak", "Kosovska Mitrovica", "Leskovac", "Novi Pazar"];
+            $cities=["London", "Paris", "Brüsszel", "Rome", "Madrid", "Zágráb", "Beograd", "Moscow", "Berlin", "Varsó", "Helsinki", "Amszterdam"];
             foreach ($cities as $citi) {
             $apiData1 = file_get_contents("https://api.openweathermap.org/data/2.5/weather?q=" . $citi . "&appid=cecafc8ca0dea8452deafc59d10a0e08");
             $weatherArray = json_decode($apiData1, true);
+            $tempCelsius = $weatherArray['main']['temp'] - 273;
             $weather = "<b>" . $weatherArray['name'] . "  " . intval($tempCelsius) . " &deg;C</b>";
             $weather_icon = $weatherArray['weather']['0']['icon'];
             $weather_icons = "<img src='http://openweathermap.org/img/wn/" . $weather_icon . "@2x.png'>" . "<br>";
@@ -287,7 +288,7 @@ $error_must_login = '';
             echo '
                 <tr>
                 <td>'.$weather.'</td>
-                <td>'.$citi.$weather_icons.'</td>
+                <td>'.$weather_icons.'</td>
                 </tr>
             ';
             }

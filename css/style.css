@@ -377,6 +377,7 @@ section{
 }
 
 .wishlist .row1{
+    margin-top: 10%;
     display: grid;
     grid-template-columns: repeat(auto-fit, 33rem);
     gap: 1.5rem;
@@ -388,7 +389,7 @@ section{
     border-radius: .5rem;
     border: var(--border);
     box-shadow: var(--box-shadow);
-    padding: 2rem;
+    padding: 1rem 0.5rem;
     position: relative;
     overflow: hidden;
     margin-bottom: 5rem;
