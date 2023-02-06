@@ -20,9 +20,13 @@ else{
     $id = '';
 }
 
-$lang = "eng";
+
+
+
 if(isset($_GET["lang"])){
     $lang = $_GET["lang"];
+}else{
+    $lang = "eng";
 }
 $language = parse_ini_file("languages/$lang");
 
@@ -38,9 +42,9 @@ $language = parse_ini_file("languages/$lang");
 
         <nav class="navbar">
             <a href="index.php" style="text-decoration: none"><?= $language["index"]?></a>
-            <a href="about.php" style="text-decoration: none"><?= $language["about"]?></a>
-            <a href="location.php" style="text-decoration: none"><?= $language["location"]?></a>
-            <a href="contact.php" style="text-decoration: none"><?= $language["contact"]?></a>
+            <a href="#Seach" style="text-decoration: none"><?= $language["about"]?></a>
+            <a href="#maincity" style="text-decoration: none"><?= $language["location"]?></a>
+            <a href="#Footer" style="text-decoration: none"><?= $language["contact"]?></a>
             <a href="?lang=eng" style="text-decoration: none"><img style="height: 20px;width: 30px" src="img/eng.png"></a>
             <a href="?lang=hun" style="text-decoration: none"><img style="height: 20px;width: 30px" src="img/hun.png"></a>
 
@@ -80,7 +84,7 @@ $language = parse_ini_file("languages/$lang");
             <?php
                 }else{
             ?>
-                <p>Kérlek előbb jelentkezz be!</p>
+                <p><?= $language["firstlogin"]?></p>
                 <div class="flex-btn">
                     <a href="login/user_login.php" class="option-btn" style="text-decoration: none;color: white"><?= $language["login"]?></a>
                     <a href="login/user_register.php" class="option-btn" style="text-decoration: none;color: white"><?= $language["register"]?></a>

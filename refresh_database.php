@@ -61,20 +61,20 @@ while ($row = $select_weather->fetch(PDO::FETCH_ASSOC)){
 <script>
     setInterval(function() {
         var isActive = true;
-        // Check if the page is active
+
         if (!document.hidden) {
             isActive = true;
         } else {
             isActive = false;
         }
 
-        // Send a request to the PHP script
+
         if (!isActive) {
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", "refresh_database.php", true);
             xhttp.send();
         }
-    }, 60000);
+    }, 30000);
 </script>
 
 </body>

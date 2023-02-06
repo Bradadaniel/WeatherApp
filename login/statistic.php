@@ -115,6 +115,4 @@ var myChart = new Chart(
 <script src="../ajax/admin.js"></script>
 </body>
 </html>
-<?php
 
-?>

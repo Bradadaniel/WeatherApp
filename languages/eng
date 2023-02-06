@@ -1,6 +1,12 @@
 login= login
 register= register
-index= Index
-about= About us
+index= Home
+about= Search
 location= Locations
 contact= Contacts
+firstlogin= "Please , first sign up!"
+globalsearch= "Global search"
+typename = "Type city name"
+cityname= "City name"
+searchbtn = Serach
+maincitys = "Major cities"

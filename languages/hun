@@ -1,6 +1,12 @@
 login= Bejelen.
 register= Regisz.
 index= Kezdőoldal
-about= Rólunk
+about= Keresés
 location= Helységek
 contact= Kapcsolat
+firstlogin = "Kérlek előbb jelentkezz be!"
+globalsearch= "Globális keresés"
+typename = "Irja be a varos nevét"
+cityname= "Város neve"
+searchbtn = Keresés
+maincitys = "Főbb városok"

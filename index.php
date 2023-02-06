@@ -124,12 +124,12 @@ $error_must_login = '';
 <?php if (isset($_GET['wishlist_added_successful'])){
     echo '<p class="empty">Sikeresen hozzáadva a kedvencekhez!</p>';
 }?>
-<div class="container Search" style="margin-top: 20rem">
-<h1>Globális keresés</h1>
+<div class="container Search" style="margin-top: 20rem" id="Seach">
+<h1><?= $language["globalsearch"]?></h1>
     <form action="" method="GET">
-        <p><label for="city">Irja be a varos nevet</label><p>
-        <p><input type="text" name="city" id="city" placeholder="Varos neve"></p>
-        <p><button type="submit" name="submit" class="btn btn-success">Kereses</button></p>
+        <p><label for="city"><?= $language["typename"]?></label><p>
+        <p><input type="text" name="city" id="city" placeholder="<?= $language["cityname"]?>"></p>
+        <p><button type="submit" name="submit" class="btn btn-success"><?= $language["searchbtn"]?></button></p>
     </form>
 </div>
 
@@ -269,10 +269,10 @@ $error_must_login = '';
     }
     ?>
 </div>
-<div class="container" style="max-width: 600px;padding:2rem 0">
+<div class="container" style="max-width: 600px;padding:2rem 0" id="maincity">
 <table class="table-index">
     <thead>
-        <th colspan="2">Főbb városok</th>
+        <th colspan="2"><?= $language['maincitys']?></th>
     </thead>
     <tbody>
             <?php
