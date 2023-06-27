@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "3b7f45df-0571-421d-9d69-766e4dfd6bd8",
+		"name": "RestfulApiLoginReg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25052918"
+	},
+	"item": [
+		{
+			"name": "http://localhost/api.php",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost/ApiReact/api.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ApiReact",
+						"api.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "asd",
+							"type": "text"
+						},
+						{
+							"key": "pass",
+							"value": "sadasasd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/ApiReact/api.php?op=create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ApiReact",
+						"api.php"
+					],
+					"query": [
+						{
+							"key": "op",
+							"value": "create"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/StormSite/api.php?op=detail&id=19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"StormSite",
+						"api.php"
+					],
+					"query": [
+						{
+							"key": "op",
+							"value": "detail"
+						},
+						{
+							"key": "id",
+							"value": "19"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "asd",
+							"type": "text"
+						},
+						{
+							"key": "no_hash",
+							"value": "asdasdasdasd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/StormSite/api.php?op=update&user_id=30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"StormSite",
+						"api.php"
+					],
+					"query": [
+						{
+							"key": "op",
+							"value": "update"
+						},
+						{
+							"key": "user_id",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
